@@ -1,0 +1,22 @@
+{
+  "name": "satsui-blog",
+  "version": "0.0.1",
+  "description": "A blog website named Sat Sui which is Latin for self sufficient",
+  "repository": "https://github.com/Jarship/satsui-blog.git",
+  "author": "John Bishop",
+  "license": "MIT",
+  "dependencies": {
+    "@emotion/core": "^10.0.21",
+    "@emotion/styled": "^10.0.17",
+    "next": "^9.0.8",
+    "react": "^16.10.2",
+    "react-dom": "^16.10.2",
+    "rebass": "^4.0.6",
+    "styled-system": "^5.1.2"
+  },
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
+  }
+}
