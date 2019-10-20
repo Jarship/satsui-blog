@@ -8,18 +8,21 @@
   "dependencies": {
     "@emotion/core": "^10.0.21",
     "@emotion/styled": "^10.0.17",
+    "@zeit/next-css": "^1.0.1",
+    "draft-js": "^0.11.1",
+    "emotion-theming": "^10.0.19",
     "express": "^4.17.1",
-    "isomorphic-unfetch": "^3.0.0",
     "next": "^9.0.8",
     "next-routes": "^1.4.2",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
+    "react-draft-wysiwyg": "^1.13.2",
     "rebass": "^4.0.6",
     "styled-system": "^5.1.2"
   },
   "scripts": {
-    "dev": "next",
+    "dev": "node server",
     "build": "next build",
-    "start": "next start"
+    "start": "NODE_ENV=production node server.js"
   }
 }
