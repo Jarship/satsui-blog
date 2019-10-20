@@ -1,6 +1,5 @@
 import styled from "@emotion/styled";
 import Layout from "../components/layout";
-import { getPost } from "../api/posts";
 
 const Wrapper = styled.div`
   padding: 3rem;
@@ -42,10 +41,11 @@ const PostPage = ({ post }) => (
   </Layout>
 );
 
+PostPage.propTypes = {
+  post: PropTypes.object.isRequired
+};
+
 PostPage.getInitialProps = async ({ query }) => {
-  const res = await getPost(query.slug);
-  const json = await res.json();
-  return { post: json[0] };
 };
 
 export default PostPage;

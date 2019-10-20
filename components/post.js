@@ -4,7 +4,7 @@ import Wrapper from './styled-post';
 
 const PostItem = ({ post }) => (
   <Wrapper>
-    <Link href={{pathname: "/[post]", query: { slug: post.title } }} as={`/${post.title}`}>
+    <Link href={{pathname: "/[post]", query: { post: post.title } }} as={`/${post.title}`}>
       <a>
         <h3>{post.title}</h3>
         <p>{post.body}</p>
