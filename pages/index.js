@@ -1,32 +1,26 @@
 import PropTypes from "prop-types";
-import Layout from '../components/layout';
-//import Post from '../components/post';
+import { useEffect } from "react";
 import Link from "next/link";
+import Layout from '../components/layout';
+import Feed from '../components/feed';
+import { withApollo } from "../lib/apollo";
 
-const IndexPage = ({ posts }) => (
-  <Layout>
-    <ul>
-      {/* {posts.map(p => (
-        <Post key={p.title} post={p} />
-      ))} */}
-      <p>This is the index page</p>
+const IndexPage = ({ links }) => {
+  useEffect(() => console.log('Links are ', links));
+  return (
+    <Layout>
       <Link href="/new_post">
-        <a>
-          Make a new post!
-        </a>
-      </Link>
-    </ul>
-  </Layout>
-);
+          <a>
+            Make a new post!
+          </a>
+        </Link>
+      <Feed />
+    </Layout>
+  );
+};
 
 IndexPage.propTypes = {
-  posts: PropTypes.array
+  links: PropTypes.array
 };
 
-IndexPage.getInitialProps = async ({ req }) => {
-  // const res = await getPosts();
-  // console.log("Posts retrieved.");
-  // return { posts: json };
-};
-
-export default IndexPage;
+export default withApollo(IndexPage);

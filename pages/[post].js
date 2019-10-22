@@ -1,5 +1,12 @@
 import styled from "@emotion/styled";
+import { useQuery } from "@apollo/react-hooks";
+import { NetworkStatus } from "apollo-client";
+import gql from 'graphql-tag';
 import Layout from "../components/layout";
+
+export default function fetchLink () {
+  const { loading, error, data }
+}
 
 const Wrapper = styled.div`
   padding: 3rem;
@@ -28,7 +35,7 @@ const Wrapper = styled.div`
   }
 `;
 
-const PostPage = ({ post }) => (
+const PostPage = ({ link }) => (
   <Layout>
     <Wrapper>
       <h1>
