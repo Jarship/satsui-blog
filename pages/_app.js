@@ -1,8 +1,10 @@
-import App, { Container } from "next/app";
+import App from "next/app";
 import React from "react";
+import { ApolloProvider } from "@apollo/react-hooks";
 import { Global, css } from "@emotion/core";
 import { ThemeProvider } from "emotion-theming";
 import theme, { globalStyles } from "../theme";
+import withApolloClient from "../lib/apollo";
 
 class MyApp extends App {
 
@@ -19,7 +21,7 @@ class MyApp extends App {
   }
 
   render() {
-    const { Component, pageProps } = this.props;
+    const { Component, pageProps, apolloClient } = this.props;
 
     return (
       <>
@@ -29,11 +31,13 @@ class MyApp extends App {
           `}
         />
         <ThemeProvider theme={theme}>
-          <Component {...pageProps} />
+          <ApolloProvider client={apolloClient}>
+            <Component {...pageProps} />
+          </ApolloProvider>
         </ThemeProvider>
       </>
     );
   }
 }
 
-export default MyApp;
+export default withApolloClient(MyApp);
