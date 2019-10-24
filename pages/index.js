@@ -1,32 +1,28 @@
-import PropTypes from "prop-types";
+import PropTypes from "prop-types"
+import gql from "graphql-tag";
+import { useQuery } from "@apollo/react-hooks";
 import Layout from '../components/layout';
-//import Post from '../components/post';
-import Link from "next/link";
+import Feed from '../components/feed';
+import checkLoggedIn from "../lib/checkLoggedIn";
 
-const IndexPage = ({ posts }) => (
-  <Layout>
-    <ul>
-      {/* {posts.map(p => (
-        <Post key={p.title} post={p} />
-      ))} */}
-      <p>This is the index page</p>
-      <Link href="/new_post">
-        <a>
-          Make a new post!
-        </a>
-      </Link>
-    </ul>
-  </Layout>
-);
+const IndexPage = ({ loggedInUser }) => {
 
-IndexPage.propTypes = {
-  posts: PropTypes.array
+  return (
+    <Layout>
+      <Feed />
+      Content Here
+      Lots of content
+    </Layout>
+  );
 };
 
-IndexPage.getInitialProps = async ({ req }) => {
-  // const res = await getPosts();
-  // console.log("Posts retrieved.");
-  // return { posts: json };
+IndexPage.propTypes = {
+  loggedInUser: PropTypes.object
+};
+
+IndexPage.getInitialProps = async context => {
+  const { loggedInUser } = await checkLoggedIn(context.apolloClient);
+  return { loggedInUser };
 };
 
 export default IndexPage;

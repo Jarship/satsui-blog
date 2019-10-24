@@ -8,6 +8,21 @@ export const colors = {
 
 export const breakpoints = ["320px", "768px", "1024px", "1274px"];
 
+export const space = [
+  "0",
+  "2px",
+  "4px",
+  "8px",
+  "16px",
+  "24px",
+  "32px",
+  "48px",
+  "64px",
+  "96px",
+  "128px",
+  "256px"
+]
+
 export const globalStyles = `
   html,
   body,

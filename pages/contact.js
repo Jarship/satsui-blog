@@ -1,3 +1,10 @@
 import Layout from "../components/layout";
+import { withApollo } from "../lib/apollo";
 
-export default () => <Layout>Contact Page</Layout>;
+const Contact = () => (
+  <Layout>
+    Contact Page
+  </Layout>
+);
+
+export default Contact;
