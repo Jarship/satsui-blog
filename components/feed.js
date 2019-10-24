@@ -6,7 +6,7 @@ import { Box, Flex } from "rebass";
 export const FEED_QUERY = gql`
   {
     feed {
-      links {
+      blogs {
         id
       }
     }
@@ -22,11 +22,11 @@ export default function Feed () {
   if (error) return <p>Error loading post, : {error}</p>;
   if (loading) return <div>Loading...</div>;
 
-  const { feed: { links } } = data;
+  const { feed: { blogs } } = data;
   return (
     <Flex as="section" flexDirection="column">
-      {links.map((link, k) => (
-        <Blog key={k} id={link.id} />
+      {blogs.map((blog, k) => (
+        <Blog key={k} id={blog.id} />
       ))}
     </Flex>
   );
