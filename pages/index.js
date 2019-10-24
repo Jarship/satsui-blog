@@ -1,26 +1,28 @@
-import PropTypes from "prop-types";
-import { useEffect } from "react";
-import Link from "next/link";
+import PropTypes from "prop-types"
+import gql from "graphql-tag";
+import { useQuery } from "@apollo/react-hooks";
 import Layout from '../components/layout';
 import Feed from '../components/feed';
-import { withApollo } from "../lib/apollo";
+import checkLoggedIn from "../lib/checkLoggedIn";
 
-const IndexPage = ({ links }) => {
-  useEffect(() => console.log('Links are ', links));
+const IndexPage = ({ loggedInUser }) => {
+
   return (
     <Layout>
-      <Link href="/new_post">
-          <a>
-            Make a new post!
-          </a>
-        </Link>
       <Feed />
+      Content Here
+      Lots of content
     </Layout>
   );
 };
 
 IndexPage.propTypes = {
-  links: PropTypes.array
+  loggedInUser: PropTypes.object
 };
 
-export default withApollo(IndexPage);
+IndexPage.getInitialProps = async context => {
+  const { loggedInUser } = await checkLoggedIn(context.apolloClient);
+  return { loggedInUser };
+};
+
+export default IndexPage;
