@@ -12,11 +12,14 @@ const Wrapper = styled.nav`
   }
 `;
 
-const Nav = () => (
+const Nav = ({ user, handleLogout }) => (
   <Wrapper>
     <Link href="/"><a>Home</a></Link>
     <Link href="/about"><a>About</a></Link>
     <Link href="/contact"><a>Contact</a></Link>
+    {user
+    ? <button onClick={handleLogout} >Sign Out</button>
+    : <Link href="/login"><a>Login/Signup</a></Link>}
   </Wrapper>
 );
 
