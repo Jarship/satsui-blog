@@ -1,3 +1,11 @@
 import Layout from '../components/layout';
+import { withApollo } from "../lib/apollo";
 
-export default () => <Layout>About Page</Layout>;
+const About = () => (
+  <Layout>
+    About Page
+  </Layout>
+);
+
+
+export default About;
