@@ -9,8 +9,9 @@ const ROOT_URI =
   ? `http://localhost${process.env.END_POINT || "3000"}`
   : process.env.ROOT_URI || localConfig.ROOT_URI;
 
-module.exports = withCSS({}), {
+module.exports = withCSS({
   publicRuntimeConfig: {
     ROOT_URI: ROOT_URI
   }
-};
+})
+;
