@@ -9,7 +9,7 @@ const IndexPage = ({ loggedInUser }) => {
 
   return (
     <Layout>
-      <Feed />
+      {/* <Feed /> */}
       Content Here
       Lots of content
     </Layout>
