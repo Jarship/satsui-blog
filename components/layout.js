@@ -16,7 +16,7 @@ const GET_USER = gql`
 `;
 
 const publicQueryOptions = {
-  ssr: true,
+  ssr: false,
   onError: e => {}
 };
 
@@ -50,8 +50,7 @@ const BasicLayout = ({ children, title, user}) => {
 const Layout = ({ children, title = 'Sat Sui' }) => {
   const { loading, error, data} = useQuery(GET_USER, publicQueryOptions);
 
-  if (loading) return <div>Loading ...</div>;
-  if (error) return <BasicLayout children={children} user={null} title={title} />
+  if (loading || error) return <BasicLayout children={children} user={null} title={title} />;
   const { getUser: user } = data;
   return (
     <BasicLayout children={children} user={user} title={title} />
