@@ -1,6 +1,6 @@
 {
   "name": "satsui-blog",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A blog website named Sat Sui which is Latin for self sufficient",
   "repository": "https://github.com/Jarship/satsui-blog.git",
   "author": "John Bishop",
@@ -36,6 +36,7 @@
   "scripts": {
     "dev": "node server",
     "build": "next build",
-    "start": "NODE_ENV=production node server.js"
+    "start": "NODE_ENV=production node server.js",
+    "export": "next build && next export"
   }
 }
