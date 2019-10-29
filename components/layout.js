@@ -15,6 +15,11 @@ const GET_USER = gql`
   }
 `;
 
+const publicQueryOptions = {
+  ssr: true,
+  onError: e => {}
+};
+
 const BasicLayout = ({ children, title, user}) => {
   const client = useApolloClient();
   const logout = () => {
@@ -43,7 +48,7 @@ const BasicLayout = ({ children, title, user}) => {
 };
 
 const Layout = ({ children, title = 'Sat Sui' }) => {
-  const { loading, error, data} = useQuery(GET_USER, { ssr: true });
+  const { loading, error, data} = useQuery(GET_USER, publicQueryOptions);
 
   if (loading) return <div>Loading ...</div>;
   if (error) return <BasicLayout children={children} user={null} title={title} />
