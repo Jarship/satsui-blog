@@ -1,6 +1,5 @@
 import { Flex } from "rebass";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import Layout from "../components/layout";
 import Register from "../components/register";
 import redirect from "../lib/redirect";
