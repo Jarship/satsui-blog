@@ -1,27 +1,29 @@
 import { Flex } from "rebass";
-import Form from "../components/signIn";
+import Link from "next/link";
+import { useRouter } from "next/router";
 import Layout from "../components/layout";
+import Register from "../components/register";
 import redirect from "../lib/redirect";
 import checkLoggedIn from "../lib/checkLoggedIn";
-import Link from "next/link";
 
-const Login = () => {
+const Signup = ({ inviteCode }) => {
   return (
     <Layout>
       <Flex width={1} justifyContent="center" alignItems="center" flexDirection="column">
-        <Form />
-        <Link href="/signup"><a>Looking for Sign Up?</a></Link>
+        <Register inviteCode={inviteCode} />
+        <Link href="/login"><a>Looking for Sign Up?</a></Link>
       </Flex>
     </Layout>
   );
 };
 
-Login.getInitialProps = async context => {
+Signup.getInitialProps = async context => {
   const { loggedInUser } = await checkLoggedIn(context.apolloClient);
   if (loggedInUser.getUser) {
     redirect(context, '/');
   }
-  return;
+  const { inviteCode } = context.query;
+  return { inviteCode };
 }
 
-export default Login;
+export default Signup;
