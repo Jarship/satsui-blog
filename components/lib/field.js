@@ -10,12 +10,12 @@ const Field = styled(Box)(
     }
   },
   variant({
-    prop: "fields"
+    scale: "fields"
   })
 );
 
 Field.defaultProps = {
-  fields: "primary"
+  variant: "primary"
 };
 
 export default props => <Field as="input" {...props} />;

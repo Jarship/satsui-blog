@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import Link from "next/link";
 
-const Wrapper = styled.nav`
+const Wrapper = styled.div`
   padding: 15px;
   border-bottom: 1px solid #ddd;
   display: flex;

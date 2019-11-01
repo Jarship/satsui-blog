@@ -1,11 +1,10 @@
 import PropTypes from "prop-types"
-import gql from "graphql-tag";
-import { useQuery } from "@apollo/react-hooks";
 import Layout from '../components/layout';
-import Feed from '../components/feed';
-import checkLoggedIn from "../lib/checkLoggedIn";
+// import Feed from '../components/feed';
+import { handleLoggedIn } from "../lib/getUser";
+import { handleVisitor } from "../lib/markVisitor";
 
-const IndexPage = ({ loggedInUser }) => {
+const IndexPage = ({ user }) => {
 
   return (
     <Layout>
@@ -21,8 +20,8 @@ IndexPage.propTypes = {
 };
 
 IndexPage.getInitialProps = async context => {
-  const { loggedInUser } = await checkLoggedIn(context.apolloClient);
-  return { loggedInUser };
+  await handleVisitor(context);
+  return;
 };
 
 export default IndexPage;

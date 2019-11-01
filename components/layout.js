@@ -1,59 +1,38 @@
 import Head from 'next/head';
-import { useQuery, useApolloClient } from '@apollo/react-hooks';
-import gql from 'graphql-tag';
+import { useApolloClient } from "@apollo/react-hooks";
+import cookie from 'cookie';
 import Wrapper from './wrapper';
 import Nav from './nav';
 import Footer from './footer';
-import cookie from 'cookie';
+import { useContext } from "react";
+import { UserContext } from './userContextWrapper';
 
-const GET_USER = gql`
-  query {
-    getUser {
-      id
-      name
-    }
-  }
-`;
-
-const publicQueryOptions = {
-  ssr: false,
-  onError: e => {}
-};
-
-const BasicLayout = ({ children, title, user}) => {
+const Layout = ({ children }) => {
+  const { user, setUser } = useContext(UserContext);
   const client = useApolloClient();
   const logout = () => {
     document.cookie = cookie.serialize('token', '', {
       maxAge: -1
     });
     client.cache.reset()
-      .then(() => client.resetStore());
+      .then(() => client.resetStore())
+      .then(() => setUser());
   };
 
   return (
     <Wrapper>
-        <Head>
-          <title>{ title }</title>
-        </Head>
-        <header>
-          <Nav user={user} handleLogout={logout} />
-        </header>
-        <main>
-          { children }
-        </main>
-        <Footer>
-        </Footer>
-      </Wrapper>
-  );
-};
-
-const Layout = ({ children, title = 'Sat Sui' }) => {
-  const { loading, error, data} = useQuery(GET_USER, publicQueryOptions);
-
-  if (loading || error) return <BasicLayout children={children} user={null} title={title} />;
-  const { getUser: user } = data;
-  return (
-    <BasicLayout children={children} user={user} title={title} />
+      <Head>
+        <title>Sat Sui</title>
+      </Head>
+      <header>
+        <Nav user={user} handleLogout={logout} />
+      </header>
+      <main>
+        { children }
+      </main>
+      <Footer>
+      </Footer>
+    </Wrapper>
   );
 };
 

@@ -2,7 +2,6 @@ import { Flex } from "rebass";
 import Form from "../components/signIn";
 import Layout from "../components/layout";
 import redirect from "../lib/redirect";
-import checkLoggedIn from "../lib/checkLoggedIn";
 import Link from "next/link";
 
 const Login = () => {
@@ -17,10 +16,6 @@ const Login = () => {
 };
 
 Login.getInitialProps = async context => {
-  const { loggedInUser } = await checkLoggedIn(context.apolloClient);
-  if (loggedInUser.getUser) {
-    redirect(context, '/');
-  }
   return;
 }
 
