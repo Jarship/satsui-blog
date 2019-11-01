@@ -10,7 +10,7 @@ const Signup = ({ inviteCode }) => {
     <Layout>
       <Flex width={1} justifyContent="center" alignItems="center" flexDirection="column">
         <Register inviteCode={inviteCode} />
-        <Link href="/login"><a>Looking for Sign Up?</a></Link>
+        <Link href="/login"><a>Looking for Log In?</a></Link>
       </Flex>
     </Layout>
   );
