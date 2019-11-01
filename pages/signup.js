@@ -3,7 +3,6 @@ import Link from "next/link";
 import Layout from "../components/layout";
 import Register from "../components/register";
 import redirect from "../lib/redirect";
-import checkLoggedIn from "../lib/checkLoggedIn";
 
 const Signup = ({ inviteCode }) => {
   return (
@@ -17,10 +16,6 @@ const Signup = ({ inviteCode }) => {
 };
 
 Signup.getInitialProps = async context => {
-  const { loggedInUser } = await checkLoggedIn(context.apolloClient);
-  if (loggedInUser.getUser) {
-    redirect(context, '/');
-  }
   const { inviteCode } = context.query;
   return { inviteCode };
 }
