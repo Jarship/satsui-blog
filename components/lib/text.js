@@ -7,7 +7,7 @@ const Text = styled(Box)(
   () => css`
     margin: 0;
   `,
-  variant({ prop: "texts" }),
+  variant({ prop: "type", scale: "texts" }),
   {
     label: "common--text"
   }
