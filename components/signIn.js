@@ -59,7 +59,6 @@ const Form = () => {
       height="500px"
       onSubmit={e => {
         e.preventDefault();
-
         signInUser({
           variables: {
             email: email,
@@ -68,19 +67,19 @@ const Form = () => {
         });
       }}
     >
-      <Text texts="h2">Log In</Text>
+      <Text type="h2">Log In</Text>
       <br />
       <Flex flexDirection="column" justifyContent="center" alignItems="center">
         <Flex flexDirection="column">
-          <Text texts="label">Email</Text>
+          <Text type="label">Email</Text>
           <Field value={email} onChange={e => setEmail(e.target.value)} placeholder="Email" />
         </Flex>
         <Flex flexDirection="column">
-          <Text texts="label">Password</Text>
+          <Text type="label">Password</Text>
           <Field type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="Password" />
         </Flex>
         <br />
-        <Field type="submit" value="Sign In" />
+        <Field type="submit" value="Sign In" disabled={!email && !password} />
         {error && <Text texts="error">No user found with that information.{error}</Text>}
       </Flex>
     </Container>

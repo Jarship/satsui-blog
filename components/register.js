@@ -47,11 +47,19 @@ const RegisterBox = ({ inviteCode = "" }) => {
   const [ confirmPass, setConfirmPass ] = useState('');
   const [ invitation, setInvitation ] = useState(inviteCode);
   const isValid = () => {
-    return password === confirmPass;
+    return password === confirmPass
+      && name
+      && password
+      && email
+      && invitation;
   };
   return (
-    <Flex 
-      as="form" 
+    <Flex
+      as="form"
+      justifyContent="center"
+      bg="oldRose"
+      width={[3 / 4, 3 / 4, 1 / 2, 1 / 4]}
+      height="500px"
       onSubmit={e => {
         e.preventDefault();
         create({
@@ -66,10 +74,10 @@ const RegisterBox = ({ inviteCode = "" }) => {
       flexDirection="column"
       bg="oldRose"
     >
-      <Text texts="h3">Sign Up</Text>
+      <Text type="h2">Sign Up</Text>
       <br />
       <Flex flexDirection="column">
-        <Text texts="label">I'd like to know your name</Text>
+        <Text type="label">I'd like to know your name</Text>
         <Field 
           value={name} 
           onChange={e => setName(e.target.value)}
@@ -77,7 +85,7 @@ const RegisterBox = ({ inviteCode = "" }) => {
         />
       </Flex>
       <Flex flexDirection="column">
-        <Text texts="label">Can I get your invite code?</Text>
+        <Text type="label">Can I get your invite code?</Text>
         <Field
           value={invitation}
           onChange={e => setInvitation(e.target.value)}
@@ -85,7 +93,7 @@ const RegisterBox = ({ inviteCode = "" }) => {
         />
       </Flex>
       <Flex flexDirection="column">
-        <Text texts="label">I will need your email, for logging in</Text>
+        <Text type="label">I will need your email, for logging in</Text>
         <Field 
           value={email} 
           onChange={e => setEmail(e.target.value)}
@@ -93,7 +101,7 @@ const RegisterBox = ({ inviteCode = "" }) => {
         />
       </Flex>
       <Flex flexDirection="column">
-        <Text texts="label">We will also need a password</Text>
+        <Text type="label">We will also need a password</Text>
         <Field
           type="password"
           value={password}
@@ -102,7 +110,7 @@ const RegisterBox = ({ inviteCode = "" }) => {
         />
       </Flex>
       <Flex flexDirection="column">
-        <Text texts="label">Can I get that again? Just to verify</Text>
+        <Text type="label">Can I get that again? Just to verify</Text>
         <Field
           type="password"
           value={confirmPass}
@@ -115,7 +123,7 @@ const RegisterBox = ({ inviteCode = "" }) => {
         value="submit"
         disabled={!isValid()}
       />
-  {error && <Text texts="label">Issue occured while registering:({error})</Text>}
+  {error && <Text type="label">Issue occured while registering:({error})</Text>}
     </Flex>
   );
 };
