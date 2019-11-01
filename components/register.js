@@ -1,39 +1,35 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { useMutation, useApolloClient } from '@apollo/react-hooks';
-import gql from 'graphql-tag';
+import cookie from "cookie";
 import { Flex } from 'rebass';
+import { CREATE_USER } from '../lib/mutations';
 import Text from './lib/text';
 import Field from './lib/field';
 import redirect from '../lib/redirect';
-import cookie from "cookie";
-
-const CREATE_USER = gql`
-  mutation Create($name: String!, $email: String!, $password: String!) {
-    createUser(
-      name: $name,
-      email: $email,
-      password: $password
-    ) {
-      token
-    }
-  }
-`;
+import { UserContext } from './userContextWrapper';
 
 const RegisterBox = ({ inviteCode = "" }) => {
   const client = useApolloClient();
-
+  const { user, setUser } = useContext(UserContext);
+  if (user) {
+    redirect({}, '/');
+  }
   const onCompleted = data => {
-    document.cookie = cookie.serialize('token', data.createUser.token, {
-      maxAge: 30 * 24 * 60 * 60,
-      path: '/'
-    });
+    if (!data.createUser.error) {
+      document.cookie = cookie.serialize('token', data.createUser.token, {
+        maxAge: 30 * 24 * 60 * 60,
+        path: '/'
+      });
 
-    // Force a reload of all the current queries now that the user
-    // is logged in
+      // Force a reload of all the current queries now that the user
+      // is logged in
 
-    client.cache.reset().then(() => {
-      redirect({}, '/');
-    });
+      client.cache.reset();
+      setUser(data.createUser.user);
+
+    } else {
+      console.error("Error", error);
+    }
   };
 
   const onError = error => {
