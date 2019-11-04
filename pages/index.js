@@ -1,7 +1,6 @@
 import PropTypes from "prop-types"
 import Layout from '../components/layout';
 // import Feed from '../components/feed';
-import { handleLoggedIn } from "../lib/getUser";
 import { handleVisitor } from "../lib/markVisitor";
 
 const IndexPage = ({ user }) => {
