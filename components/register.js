@@ -66,7 +66,7 @@ const RegisterBox = ({ ...otherProps }) => {
         create({
           variables: {
             name: name,
-            email: email,
+            email: email.toLowerCase(),
             password: password
           }
         });
