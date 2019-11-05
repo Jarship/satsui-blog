@@ -1,25 +1,24 @@
 import styled from "@emotion/styled";
-import Link from "next/link";
+import Link from "./lib/link";
+import { Flex } from "rebass";
+import UserMenu from './lib/userMenuDropdown';
 
-const Wrapper = styled.div`
-  padding: 15px;
+const Wrapper = styled(Flex)`
   border-bottom: 1px solid #ddd;
-  display: flex;
-  background: #387EF5;
-  a {
-    padding: 0 15px;
-    color: #FFF;
-  }
+  height: 60px;
 `;
 
 const Nav = ({ user, handleLogout }) => (
-  <Wrapper>
-    <Link href="/"><a>Home</a></Link>
-    <Link href="/about"><a>About</a></Link>
-    <Link href="/contact"><a>Contact</a></Link>
+  <Wrapper bg="khaki" flexWrap="nowrap" justifyContent="space-between">
+    <Flex>
+      <Link variant="menuLink" href="/">Home</Link>
+      <Link variant="menuLink" href="/about">About</Link>
+      <Link variant="menuLink" href="/contact">Contact</Link>
+    </Flex>
     {user
-    ? <button onClick={handleLogout} >Sign Out</button>
-    : <Link href="/login"><a>Login/Signup</a></Link>}
+    ? <UserMenu user={user} logout={handleLogout} />
+    : <Flex justifyContent="flex-end"><Link px={4} variant="menuLink" href="/login">Login/Signup</Link></Flex>
+    }
   </Wrapper>
 );
 
