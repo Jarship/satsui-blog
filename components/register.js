@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useState, useEffect } from 'react';
 import { useMutation, useApolloClient } from '@apollo/react-hooks';
 import cookie from "cookie";
 import { Flex } from 'rebass';
@@ -6,14 +6,21 @@ import { CREATE_USER } from '../lib/mutations';
 import Text from './lib/text';
 import Field from './lib/field';
 import redirect from '../lib/redirect';
-import { UserContext } from './userContextWrapper';
+import { handleLoggedIn} from '../lib/getUser';
+import FormField from './lib/formField';
 
-const RegisterBox = ({ inviteCode = "" }) => {
+const RegisterBox = ({ ...otherProps }) => {
   const client = useApolloClient();
-  const { user, setUser } = useContext(UserContext);
-  if (user) {
-    redirect({}, '/');
-  }
+  useEffect(() => {
+    const fetchUser = async () => {
+      const results = await handleLoggedIn(client);
+      if(results.user) {
+        redirect({}, '/');
+      }
+    };
+
+    fetchUser();
+  }, []);
   const onCompleted = data => {
     if (!data.createUser.error) {
       document.cookie = cookie.serialize('token', data.createUser.token, {
@@ -41,19 +48,17 @@ const RegisterBox = ({ inviteCode = "" }) => {
   const [ password, setPassword ] = useState('');
   const [ email, setEmail ] = useState('');
   const [ confirmPass, setConfirmPass ] = useState('');
-  const [ invitation, setInvitation ] = useState(inviteCode);
   const isValid = () => {
     return password === confirmPass
       && name
       && password
-      && email
-      && invitation;
+      && email;
   };
   return (
     <Flex
       as="form"
       justifyContent="center"
-      bg="oldRose"
+      alignItems="center"
       width={[3 / 4, 3 / 4, 1 / 2, 1 / 4]}
       height="500px"
       onSubmit={e => {
@@ -61,64 +66,52 @@ const RegisterBox = ({ inviteCode = "" }) => {
         create({
           variables: {
             name: name,
-            email: email,
-            password: password,
-            invite: invitation
+            email: email.toLowerCase(),
+            password: password
           }
         });
       }} 
       flexDirection="column"
       bg="oldRose"
+      {...otherProps}
     >
-      <Text type="h2">Sign Up</Text>
-      <br />
-      <Flex flexDirection="column">
-        <Text type="label">I'd like to know your name</Text>
-        <Field 
-          value={name} 
-          onChange={e => setName(e.target.value)}
-          placeholder="My name is ..."
-        />
-      </Flex>
-      <Flex flexDirection="column">
-        <Text type="label">Can I get your invite code?</Text>
-        <Field
-          value={invitation}
-          onChange={e => setInvitation(e.target.value)}
-          placeholder="I was sent the code ..."
-        />
-      </Flex>
-      <Flex flexDirection="column">
-        <Text type="label">I will need your email, for logging in</Text>
-        <Field 
-          value={email} 
-          onChange={e => setEmail(e.target.value)}
-          placeholder="My email is ..."
-        />
-      </Flex>
-      <Flex flexDirection="column">
-        <Text type="label">We will also need a password</Text>
-        <Field
-          type="password"
-          value={password}
-          onChange={e => setPassword(e.target.value)}
-          placeholder="Make it weird, like #9a5bca3"
-        />
-      </Flex>
-      <Flex flexDirection="column">
-        <Text type="label">Can I get that again? Just to verify</Text>
-        <Field
-          type="password"
-          value={confirmPass}
-          onChange={e => setConfirmPass(e.target.value)}
-          placeholder="Whatever you typed above"
-        />
-      </Flex>
-      <Field
-        type="submit"
-        value="submit"
-        disabled={!isValid()}
+      <Text my={6} type="h2">Sign Up</Text>
+      <FormField
+        value={name}
+        onChange={setName}
+        placeholder="My name is..."
+        label="I'd like to know your name"
+        flexDirection="column"
       />
+      <FormField
+        value={email}
+        onChange={setEmail}
+        placeholder="My email is ..."
+        label="Email, for loggin in"
+        flexDirection="column"
+      />
+      <FormField
+        value={password}
+        onChange={setPassword}
+        placeholder="Make it weird, like #9a5bca3"
+        label="Password time!!!!"
+        flexDirection="column"
+      />
+      <FormField
+        value={confirmPass}
+        onChange={setConfirmPass}
+        placeholder="Whatever you typed above"
+        label="Password Confirmation"
+        flexDirection="column"
+      />
+      <Flex>
+        <Field
+          my={4}
+          type="submit"
+          value="submit"
+          disabled={!isValid()}
+        />
+      </Flex>
   {error && <Text type="label">Issue occured while registering:({error})</Text>}
     </Flex>
   );

@@ -5,8 +5,6 @@ import { Global, css } from "@emotion/core";
 import { ThemeProvider } from "emotion-theming";
 import theme, { globalStyles } from "../theme";
 import withApolloClient from "../lib/apollo";
-import withUser from "../lib/withUser";
-import UserContextWrapper from "../components/userContextWrapper";
 
 
 class MyApp extends App {
@@ -24,7 +22,7 @@ class MyApp extends App {
   }
 
   render() {
-    const { Component, pageProps, apolloClient, user } = this.props;
+    const { Component, pageProps, apolloClient } = this.props;
 
     return (
       <>
@@ -35,9 +33,7 @@ class MyApp extends App {
         />
         <ThemeProvider theme={theme}>
           <ApolloProvider client={apolloClient}>
-            <UserContextWrapper loggedInUser={user}>
-              <Component {...pageProps} />
-            </UserContextWrapper>
+            <Component {...pageProps} />
           </ApolloProvider>
         </ThemeProvider>
       </>
@@ -45,4 +41,4 @@ class MyApp extends App {
   }
 }
 
-export default withApolloClient(withUser(MyApp));
+export default withApolloClient(MyApp);

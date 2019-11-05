@@ -1,26 +1,33 @@
 import styled from "@emotion/styled";
 import { css } from "@emotion/core";
 import { Flex } from "rebass";
-import { useState, useContext } from "react";
+import { useState, useEffect } from "react";
 import { useMutation, useApolloClient } from "@apollo/react-hooks";
 import redirect from "../lib/redirect";
 import { SIGN_IN } from "../lib/mutations";
 import cookie from "cookie";
 import Text from "./lib/text";
 import Field from "./lib/field";
-import { UserContext } from './userContextWrapper';
+import { handleLoggedIn} from '../lib/getUser';
+import FormField from './lib/formField';
 
 const Container = styled(Flex)(
   () => css`
   `
 );
 
-const Form = () => {
+const Form = ({ ...otherProps }) => {
   const client = useApolloClient();
-  const { user, setUser } = useContext(UserContext);
-  if (user) {
-    redirect({}, '/');
-  }
+  useEffect(() => {
+    const fetchUser = async () => {
+      const results = await handleLoggedIn(client);
+      if(results.user) {
+        redirect({}, '/');
+      }
+    };
+
+    fetchUser();
+  }, []);
   const onCompleted = data => {
     if (!data.signInUser.error) {
     // Store the token in cookie
@@ -31,7 +38,6 @@ const Form = () => {
       // Force a reload of all the current queries now that the user is
       // logged in
       client.cache.reset();
-      setUser(data.signInUser.user);
     } else {
       setSignInError(data.signInUser.error.message);
     }
@@ -57,34 +63,39 @@ const Form = () => {
     <Container
       as="form"
       justifyContent="center"
-      bg="oldRose"
-      width={[3 / 4, 3 / 4, 1 / 2, 1 / 4]}
+      alignItems="center"
+      flexDirection="column"
+      {...otherProps}
       height="500px"
       onSubmit={e => {
         e.preventDefault();
         signInUser({
           variables: {
-            email: email,
+            email: email.toLowerCase(),
             password: password
           }
         });
       }}
     >
-      <Text type="h2">Log In</Text>
-      <br />
-      <Flex flexDirection="column" justifyContent="center" alignItems="center">
-        <Flex flexDirection="column">
-          <Text type="label">Email</Text>
-          <Field value={email} onChange={e => setEmail(e.target.value)} placeholder="Email" />
-        </Flex>
-        <Flex flexDirection="column">
-          <Text type="label">Password</Text>
-          <Field type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="Password" />
-        </Flex>
-        <br />
-        <Field type="submit" value="Sign In" disabled={!email && !password} />
-        {signInError && <Text texts="error">{signInError}</Text>}
+      <Text my={6} type="h2">Log In</Text>
+      <FormField
+        value={email}
+        onChange={setEmail}
+        placeholder="Email"
+        label="Email"
+        flexDirection="column"
+      />
+      <FormField
+        value={password}
+        onChange={setPassword}
+        placeholder="Password"
+        label="Password"
+        flexDirection="column"
+      />
+      <Flex>
+        <Field my={4} type="submit" value="Sign In" disabled={!email && !password} />
       </Flex>
+      {signInError && <Text texts="error">{signInError}</Text>}
     </Container>
 
   );

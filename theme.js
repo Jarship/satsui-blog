@@ -1,6 +1,7 @@
 export const colors = {
   oldRose : "#C2847A",
   khaki: "#C9B79C",
+  darkKhaki: "#B09265",
   lightFrenchBeige: "#D0B17A",
   oldSilver: "#848586",
   smoke: "#71816D",
@@ -45,6 +46,16 @@ export const texts = {
     lineHeight: "18px",
     textAlign: "center"
   },
+  menuButton: {
+    color: colors.black[0],
+    fontSize: "16px",
+    fontWeight: "normal",
+    fontStyle: "normal",
+    lineHeight: "25px",
+    cursor: "pointer",
+    textAlign: "center",
+    padding: space[4]
+  },
   common: {
     color: colors.black[2],
     fontSize: "12px",
@@ -52,6 +63,23 @@ export const texts = {
     fontStyle: "normal",
     lineHeight: "16px"
   }
+};
+
+export const linkStyles = {
+  menuLink : {
+    ...texts.menuButton,
+    a: {
+      color: colors.black[0]
+    },
+    ":hover": {
+      backgroundColor: "rgba(0, 0, 0, 0.3)",
+      color: colors.white
+    },
+    "a:visited": {
+      color: colors.black[0]
+    }
+  },
+  common : texts.common
 };
 
 export const fields = {
@@ -84,5 +112,6 @@ export default {
   colors,
   breakpoints,
   space,
-  texts
+  texts,
+  linkStyles,
 };

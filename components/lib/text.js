@@ -5,7 +5,6 @@ import { Box } from "rebass";
 
 const Text = styled(Box)(
   () => css`
-    margin: 0;
   `,
   variant({ prop: "type", scale: "texts" }),
   {
