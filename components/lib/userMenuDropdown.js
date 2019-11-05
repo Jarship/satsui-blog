@@ -36,14 +36,12 @@ const UserMenu = ({ user: { photo, name, status }, logout, ...otherProps}) => {
   return (
     <Menu
       zIndex="3"
-      height={open ? "230px" : "60px"}
       flexDirection="column"
       onMouseLeave={() => handleMouseLeave()}
       onClick={() => toggleMenu()}
       onMouseEnter={() => handleDisplay(3)}
       bg={open ? "darkKhaki" : "khaki"}
       {...otherProps}
-      borderRadius="0 0 15px 15px"
     >
       <Flex
         alignSelf="flex-end"
@@ -59,10 +57,12 @@ const UserMenu = ({ user: { photo, name, status }, logout, ...otherProps}) => {
         <Text type="menuButton" pl={4}>{name} ▼</Text>
       </Flex>
       {open &&
-        <Flex flexDirection="column" justifyContent="space-between">
-          <Link variant="menuLink" href="/[profile]">
-            Profile
-          </Link>
+        <Menu flexDirection="column" bg="darkKhaki" justifyContent="space-between" zIndex="3" borderRadius="0 0 15px 15px">
+          {false && 
+            <Link variant="menuLink" href="/[profile]">
+              Profile
+            </Link>
+          }
           {status === "ADMINISTRATOR" &&
             <Link variant="menuLink" href="/admin">
               Admin Page
@@ -75,7 +75,7 @@ const UserMenu = ({ user: { photo, name, status }, logout, ...otherProps}) => {
           >
             Log out
           </Text>
-        </Flex>
+        </Menu>
       }
     </Menu>
   );

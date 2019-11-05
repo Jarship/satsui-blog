@@ -31,8 +31,7 @@ const RegisterBox = ({ ...otherProps }) => {
       // Force a reload of all the current queries now that the user
       // is logged in
 
-      client.cache.reset();
-      setUser(data.createUser.user);
+      client.cache.reset().then(() => redirect({}, '/'));
 
     } else {
       console.error("Error", error);
