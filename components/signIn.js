@@ -37,7 +37,7 @@ const Form = ({ ...otherProps }) => {
       });
       // Force a reload of all the current queries now that the user is
       // logged in
-      client.cache.reset();
+      client.cache.reset().then(() => redirect({}, '/'));
     } else {
       setSignInError(data.signInUser.error.message);
     }
