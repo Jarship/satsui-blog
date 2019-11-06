@@ -8,28 +8,26 @@ import Text from '../../components/lib/text';
 import { UPLOAD_PROFILE_PICTURE } from '../../lib/mutations';
 import FileUpload from '../../components/profileImageUpload';
 
-let uploadUrl = "";
-
 const Profile = () => {
   const [user, setUser] = useState(null); // Current User
   const [uploadFailure, setUploadFailure] =  useState(null); // Errors from uploading
   const [uploadProgress, setUploadProgress] = useState(0); // upload progress for picture
   const client = useApolloClient(); // Apollo State
 
-  //This useEffect is used to get the current user for display
-  useEffect(() => { 
-    const fetchUser = async () => {
-      const results = await handleLoggedIn(client);
-      setUser(results.user);
-    };
+  const fetchUser = async () => {
+    const results = await handleLoggedIn(client);
+    setUser(results.user);
+  };
 
+  //This useEffect is used to get the current user for display
+  useEffect(() => {
     fetchUser();
   }, []);
 
   // onCompleted is for the mutation that fetches the Upload URL
   const onCompleted = async data => {
     if (!data.uploadProfilePicture.error) {
-      uploadUrl = data.uploadProfilePicture.url;
+      fetchUser();
     } else {
       setUploadFailure(data.uploadProfilePicture.error.message);
     }
@@ -48,44 +46,24 @@ const Profile = () => {
 
   // handle Uploading the user profile photo
   const handlePictureUpload = async ({
-    file
+    file,
+    local
   } = {}) => {
+    setUploadProgress(25);
     if (!file) {
       return;
     }
-    await uploadProfilePicture();
-    setUploadProgress(25);
-    const response = await fetch(
-      uploadUrl, {
-        method: 'PUT',
-        body: file,
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'image/*'
-        },
-      },
-    );
     setUploadProgress(50);
-
-    if (response.status !== 200) {
-      setUploadFailure("Error, image couldn't upload");
-      console.log("Response is ", response);
-    } else {
-      setUploadProgress(100);
-    }
+    uploadProfilePicture({ variables: { file: local } });
+    setUploadProgress(100);
   }
-
-  const handleClick = e => {
-    e.preventDefault();
-    uploadProfilePicture();
-  };
 
   return (
     <Layout>
       {user &&
         <FileUpload
           loading={uploadProgress}
-          image={(<Image sx={{ borderRadius: "50% "}} source={user.photo} altText="Profile Picture" />)}
+          image={(<Image variant="profile" source={user.photo} altText="Profile Picture" />)}
           onFileChange={handlePictureUpload}
         />
       }
