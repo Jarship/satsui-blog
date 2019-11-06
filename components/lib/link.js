@@ -24,9 +24,9 @@ LinkWrapper.defaultProps = {
   variant: "common"
 }
 
-const StyledLink = ({ href, children, ...otherProps }) => (
+const StyledLink = ({ href, as = null, children, ...otherProps }) => (
   <LinkWrapper {...otherProps}>
-    <Link href={href}>
+    <Link href={href} as={as}>
       <a>
         {children}
       </a>

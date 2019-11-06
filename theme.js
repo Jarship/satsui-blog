@@ -88,6 +88,11 @@ export const fields = {
   }
 };
 
+export const profilePicture = {
+  width: "274px",
+  height: "187px"
+};
+
 export const globalStyles = `
   html,
   body,
@@ -114,4 +119,5 @@ export default {
   space,
   texts,
   linkStyles,
+  profilePicture,
 };

@@ -17,7 +17,7 @@ const hover = {
 
 const Menu = styled(Flex)(position, border);
 
-const UserMenu = ({ user: { photo, name, status }, logout, ...otherProps}) => {
+const UserMenu = ({ user: { photo, name, status, url }, logout, ...otherProps}) => {
   const [open, setOpen] = useState(false);
   const [timer, setTimer] = useState();
 
@@ -58,11 +58,9 @@ const UserMenu = ({ user: { photo, name, status }, logout, ...otherProps}) => {
       </Flex>
       {open &&
         <Menu flexDirection="column" bg="darkKhaki" justifyContent="space-between" zIndex="3" borderRadius="0 0 15px 15px">
-          {false && 
-            <Link variant="menuLink" href="/[profile]">
-              Profile
-            </Link>
-          }
+          <Link variant="menuLink" href="/p/[profile]" as={`/p/${url}`} >
+            Profile
+          </Link>
           {status === "ADMINISTRATOR" &&
             <Link variant="menuLink" href="/admin">
               Admin Page
@@ -82,8 +80,13 @@ const UserMenu = ({ user: { photo, name, status }, logout, ...otherProps}) => {
 };
 
 UserMenu.propTypes = {
-  photo: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
+  user: PropTypes.shape({
+    photo: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    status: PropTypes.string.isRequired,
+    url: PropTypes.string.isRequired,
+  }),
+  logout: PropTypes.func.isRequired,
 };
 
 export default UserMenu;
