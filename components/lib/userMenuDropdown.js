@@ -45,14 +45,12 @@ const UserMenu = ({ user: { photo, name, status, url }, logout, ...otherProps}) 
     >
       <Flex
         alignSelf="flex-end"
-        height="60px"
         alignItems="center"
       >
         <Image
+          variant="thumbnail"
           source={photo}
           altText="User Icon"
-          width={1 / 4}
-          pl={3}
         />
         <Text type="menuButton" pl={4}>{name} ▼</Text>
       </Flex>

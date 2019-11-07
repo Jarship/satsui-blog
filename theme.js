@@ -65,6 +65,33 @@ export const texts = {
   }
 };
 
+export const headers = {
+  primary: {
+    height: "60px",
+    borderBottom: '1px solid #ddd',
+    backgroundColor: colors.khaki,
+    flexWrap: 'nowrap',
+    justifyContent: "space-between"
+  }
+};
+
+export const images = {
+  profile : {
+    height: "150px",
+    width: "150px",
+    display: "block",
+    overflow: "hidden",
+    borderRadius: "50%"
+  },
+  thumbnail: {
+    height: `calc(${headers.primary.height} - ${space[4]})`,
+    width: `calc(${headers.primary.height} - ${space[4]})`,
+    display: "block",
+    overflow: 'hidden',
+    borderRadius: "50%"
+  }
+};
+
 export const linkStyles = {
   menuLink : {
     ...texts.menuButton,
@@ -118,6 +145,8 @@ export default {
   breakpoints,
   space,
   texts,
+  headers,
   linkStyles,
   profilePicture,
+  images,
 };
