@@ -13,7 +13,7 @@ const Text = styled(Box)(
 );
 
 Text.defaultProps = {
-  texts: "common"
+  type: "common"
 };
 
 export default Text;

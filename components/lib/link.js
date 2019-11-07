@@ -2,10 +2,11 @@ import Link from 'next/link';
 import { css } from '@emotion/core';
 import styled from '@emotion/styled';
 import { variant } from 'styled-system';
-import { Box } from 'rebass';
+import { Flex } from 'rebass';
 import PropTypes from 'prop-types';
+import Text from './text';
 
-const LinkWrapper = styled(Box)(
+const LinkWrapper = styled(Flex)(
   () => css`
     a {
       text-decoration: none;
@@ -28,7 +29,9 @@ const StyledLink = ({ href, as = null, children, ...otherProps }) => (
   <LinkWrapper {...otherProps}>
     <Link href={href} as={as}>
       <a>
-        {children}
+        <Text type="menuButton" width={1} height={1}>
+          {children}
+        </Text>
       </a>
     </Link>
   </LinkWrapper>
