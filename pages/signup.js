@@ -8,7 +8,7 @@ const Signup = () => {
     <Layout>
       <Flex width={1} justifyContent="center" alignItems="center" flexDirection="column">
         <Register bg="oldRose" width={[1, 1, 1 / 2, 1 / 3]} />
-        <Link href="/login"><a>Looking for Log In?</a></Link>
+        <Link href="/login">Looking for Log In?</Link>
       </Flex>
     </Layout>
   );

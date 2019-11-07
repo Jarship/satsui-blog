@@ -1,8 +1,16 @@
 import PropTypes from 'prop-types';
+import styled from '@emotion/styled';
 import { Box } from 'rebass';
+import { variant } from 'styled-system';
+
+const Wrapper = styled(Box)(variant({ scale: "images" }));
+
+Wrapper.defaultProps = {
+  variant: "regular"
+};
 
 const Image = ({source, altText, ...otherProps}) => (
-  <Box {...otherProps}>
+  <Wrapper {...otherProps}>
     <Box
       as="img"
       sx={{
@@ -14,7 +22,7 @@ const Image = ({source, altText, ...otherProps}) => (
       src={source}
       alt={altText}
     />
-  </Box>
+  </Wrapper>
 );
 
 Image.propTypes = {

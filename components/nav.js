@@ -1,15 +1,17 @@
 import styled from "@emotion/styled";
+import { variant } from 'styled-system';
 import Link from "./lib/link";
 import { Flex } from "rebass";
 import UserMenu from './lib/userMenuDropdown';
 
-const Wrapper = styled(Flex)`
-  border-bottom: 1px solid #ddd;
-  height: 60px;
-`;
+const Wrapper = styled(Flex)(
+  () => `
+  `,
+  variant({ scale: "headers" })
+);
 
 const Nav = ({ user, handleLogout }) => (
-  <Wrapper bg="khaki" flexWrap="nowrap" justifyContent="space-between">
+  <Wrapper variant="primary">
     <Flex>
       <Link variant="menuLink" href="/">Home</Link>
       <Link variant="menuLink" href="/about">About</Link>
