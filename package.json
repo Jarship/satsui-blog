@@ -1,6 +1,6 @@
 {
   "name": "satsui-blog",
-  "version": "0.3.2",
+  "version": "0.3.4",
   "description": "A blog website named Sat Sui which is Latin for self sufficient",
   "repository": "https://github.com/Jarship/satsui-blog.git",
   "author": "John Bishop",
@@ -15,7 +15,7 @@
     "apollo-cache-inmemory": "^1.6.3",
     "apollo-client": "^2.6.4",
     "apollo-link-context": "^1.0.19",
-    "apollo-link-http": "^1.5.16",
+    "apollo-upload-client": "^11.0.0",
     "cookie": "^0.4.0",
     "dotenv": "^8.2.0",
     "draft-js": "^0.11.1",

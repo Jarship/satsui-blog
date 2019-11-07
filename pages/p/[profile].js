@@ -13,9 +13,22 @@ const Profile = ({ userProfileUrl, current }) => {
   const [uploadFailure, setUploadFailure] =  useState(null); // Errors from uploading
   const [uploadProgress, setUploadProgress] = useState(0); // upload progress for picture
 
+  const { loading, error, data } = useQuery(PROFILE_QUERY, {
+    variables: { url: userProfileUrl },
+    ssr: true
+  });
+
+  if (error) return <Layout><p>Error loading profile.</p></Layout>;
+  if (loading) return <div>Loading...</div>
+
+  const { profile: user } = data;
+  const [profilePicture, setProfilePicture] = useState(<Image variant="profile" source={user.photo} altText="Profile Picture" />);
+
   // onCompleted is for the mutation that fetches the Upload URL
   const onCompleted = async data => {
     if (!data.uploadProfilePicture.error) {
+      setUploadProgress(0);
+      setProfilePicture(<Image variant="profile" source={data.uploadProfilePicture.photoUrl} altText="Profile Picture" />);
     } else {
       setUploadFailure(data.uploadProfilePicture.error.message);
     }
@@ -42,34 +55,23 @@ const Profile = ({ userProfileUrl, current }) => {
       return;
     }
     setUploadProgress(50);
-    uploadProfilePicture({ variables: { file: local } });
+    uploadProfilePicture({ variables: { picture: file } });
     setUploadProgress(100);
   };
-
-  const { loading, error, data } = useQuery(PROFILE_QUERY, {
-    variables: { url: userProfileUrl },
-    ssr: true
-  });
-
-  if (error) return <Layout><p>Error loading profile.</p></Layout>;
-  if (loading) return <div>Loading...</div>
-
-  const { profile: user } = data;
-  const ProfileImage = <Image variant="profile" source={user.photo} altText="Profile Picture" />;
 
   return (
     <Layout>
       <Flex flexDirection="column" alignItems="center">
         <Text type="h2">{user.name}</Text>
         <Flex alignSelf="flex-start" ml={4}>
-          {userProfileUrl === current.url ?
+          {current && userProfileUrl === current.url ?
             <FileUpload
               loading={uploadProgress}
-              image={ProfileImage}
+              image={profilePicture}
               onFileChange={handlePictureUpload}
             />
             :
-            ProfileImage
+            profilePicture
           }
         </Flex>
         {uploadFailure && <Text type="error">{uploadFailure}</Text>}

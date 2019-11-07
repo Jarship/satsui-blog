@@ -94,9 +94,11 @@ export const images = {
 
 export const linkStyles = {
   menuLink : {
-    ...texts.menuButton,
     a: {
-      color: colors.black[0]
+      color: colors.black[0],
+      width: "100%",
+      height: `calc(${space[4]} + ${space[4]} + ${texts.menuButton.lineHeight})`
+      
     },
     ":hover": {
       backgroundColor: "rgba(0, 0, 0, 0.3)",
