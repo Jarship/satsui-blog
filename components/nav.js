@@ -19,7 +19,7 @@ const Nav = ({ user, handleLogout }) => (
     </Flex>
     {user
     ? <UserMenu user={user} logout={handleLogout} />
-    : <Flex justifyContent="flex-end"><Link px={4} variant="menuLink" href="/login">Login/Signup</Link></Flex>
+    : <Flex justifyContent="flex-end"><Link textType="menuButton" px={4} variant="menuLink" href="/login">Login/Signup</Link></Flex>
     }
   </Wrapper>
 );
