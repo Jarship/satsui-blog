@@ -56,11 +56,11 @@ const UserMenu = ({ user: { photo, name, status, url }, logout, ...otherProps}) 
       </Flex>
       {open &&
         <Menu flexDirection="column" bg="darkKhaki" justifyContent="space-between" zIndex="3" borderRadius="0 0 15px 15px">
-          <Link variant="menuLink" href="/p/[profile]" as={`/p/${url}`} >
+          <Link textType="menuButton" variant="menuLink" href="/p/[profile]" as={`/p/${url}`} >
             Profile
           </Link>
           {status === "ADMINISTRATOR" &&
-            <Link variant="menuLink" href="/admin">
+            <Link variant="menuLink" textType="menuButton" href="/admin">
               Admin Page
             </Link>
           }
