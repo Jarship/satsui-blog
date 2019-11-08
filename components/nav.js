@@ -13,9 +13,9 @@ const Wrapper = styled(Flex)(
 const Nav = ({ user, handleLogout }) => (
   <Wrapper variant="primary">
     <Flex>
-      <Link variant="menuLink" href="/">Home</Link>
-      <Link variant="menuLink" href="/about">About</Link>
-      <Link variant="menuLink" href="/contact">Contact</Link>
+      <Link textType="menuButton" variant="menuLink" href="/">Home</Link>
+      <Link textType="menuButton" variant="menuLink" href="/about">About</Link>
+      <Link textType="menuButton" variant="menuLink" href="/contact">Contact</Link>
     </Flex>
     {user
     ? <UserMenu user={user} logout={handleLogout} />

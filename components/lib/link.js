@@ -25,11 +25,11 @@ LinkWrapper.defaultProps = {
   variant: "common"
 }
 
-const StyledLink = ({ variant, href, as = null, children, ...otherProps }) => (
+const StyledLink = ({ textType, href, as = null, children, ...otherProps }) => (
   <LinkWrapper {...otherProps}>
     <Link href={href} as={as}>
       <a>
-        <Text type={variant === "menuLink" ? "menuButton" : ""} width={1} height={1}>
+        <Text type={textType} width={1}>
           {children}
         </Text>
       </a>

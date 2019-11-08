@@ -2,6 +2,7 @@ import { Flex } from 'rebass';
 import Layout from '../components/layout';
 import Icon from '../components/lib/icon';
 import Text from '../components/lib/text';
+import GithubIcon from '../components/lib/githubIcon';
 
 
 const COMPLETED = [
@@ -53,6 +54,17 @@ const About = () => (
         constructive, regenerative, and permanent future. <br/>If you would like to be
         a part of the movement, please read along. If you'd like to follow the development,
         please check below. <br/><strong>Thanks for visiting</strong></Text>
+      <Flex alignItems="center" width={1} flexDirection="column">
+        <Text type="h2">Repositories</Text>
+        <Flex width={0.8} justifyContent="space-evenly">
+          <Text type="h3">Blog</Text>
+          <Text type="h3">API</Text>
+        </Flex>
+        <Flex width={0.8} justifyContent="space-evenly">
+          <Flex as="a" href="http://github.com/Jarship/satsui-blog"><GithubIcon /></Flex>
+          <Flex as="a" href="http://github.com/Jarship/graphql-blog"><GithubIcon /></Flex>
+        </Flex>
+      </Flex>
       <Text type="h2">Development Progress</Text>
       <Text type="h3">Completed</Text>
       <Flex width={[1, 0.9, 0.8]} justifyContent="space-around">
