@@ -10,7 +10,12 @@ export const colors = {
     "#000",
     "#121212",
     "#242424"
-  ]
+  ],
+  completed: "#156715",
+  inProgress: "#008080",
+  inProgressBorder: "#408000",
+  planned: "#808080"
+
 };
 
 export const breakpoints = ["320px", "768px", "1024px", "1274px"];
@@ -37,6 +42,13 @@ export const texts = {
     fontWeight: "600",
     fontStyle: "normal",
     lineHeight: "42px"
+  },
+  h3: {
+    color: colors.black[0],
+    fontSize: "24px",
+    fontWeight: "normal",
+    fontStyle: "normal",
+    lineHeight: "36px"
   },
   label: {
     color: colors.black[1],
@@ -108,7 +120,14 @@ export const linkStyles = {
       color: colors.black[0]
     }
   },
-  common : texts.common
+  common : {
+    ":hover": {
+      color: colors.black[2]
+    },
+    "a:visited": {
+      color: colors.black[2]
+    }
+  }
 };
 
 export const fields = {
@@ -120,6 +139,60 @@ export const fields = {
 export const profilePicture = {
   width: "274px",
   height: "187px"
+};
+
+export const icons = {
+  completed: {
+    backgroundColor: colors.completed,
+    border: `2px solid ${colors.black[0]}`,
+    ":hover": {
+      animation: "grow 1s ease-in-out",
+      "@keyframes grow": {
+        "49%": {
+          transform: "scale(2)"
+        },
+        "50%": {
+          transform: "scale(0)"
+        },
+        "100%": {
+          transform: "scale(1)"
+        }
+      }
+    }
+  },
+  inProgress: {
+    backgroundColor: colors.inProgress,
+    border: `2px dotted ${colors.black[0]}`,
+    ":hover" : {
+      animation: "spin 2s linear infinite",
+      "@keyframes spin": {
+        "100%": {
+          transform: "rotateZ(350deg)"
+        }
+      }
+    }
+  },
+  planned: {
+    backgroundColor: colors.planned,
+    border: `1px dotted ${colors.black[0]}`,
+    ":hover" : {
+      animation: "wiggle .5s linear infinite",
+      "@keyframes wiggle": {
+        "25%": {
+          transform: "skew(10deg, 10deg)"
+        },
+        "50%": {
+          transform: "skew(-10deg, -10deg)"
+        },
+        "75%": {
+          transform: "scale(1.2)"
+        },
+        "100%": {
+          transfrom: "scale(0.9)"
+        }
+      }
+    }
+  }
 };
 
 export const globalStyles = `
@@ -151,4 +224,5 @@ export default {
   linkStyles,
   profilePicture,
   images,
+  icons,
 };
