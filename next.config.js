@@ -12,6 +12,9 @@ const ROOT_URI =
 module.exports = withCSS({
   publicRuntimeConfig: {
     ROOT_URI: ROOT_URI
-  }
+  },
+  experimental: {
+    publicDirectory: true
+  },
 })
 ;
