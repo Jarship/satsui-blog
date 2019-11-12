@@ -52,15 +52,15 @@ export const texts = {
   },
   label: {
     color: colors.black[1],
-    fontSize: "14px",
+    fontSize: "16px",
     fontWeight: "normal",
     fontStyle: "normal",
-    lineHeight: "18px",
+    lineHeight: "22px",
     textAlign: "center"
   },
   menuButton: {
     color: colors.black[0],
-    fontSize: "16px",
+    fontSize: "18px",
     fontWeight: "normal",
     fontStyle: "normal",
     lineHeight: "25px",
@@ -70,10 +70,10 @@ export const texts = {
   },
   common: {
     color: colors.black[2],
-    fontSize: "12px",
+    fontSize: "14px",
     fontWeight: "normal",
     fontStyle: "normal",
-    lineHeight: "16px"
+    lineHeight: "18px"
   }
 };
 
