@@ -16,7 +16,7 @@ const FooterWrapper = styled(Flex)`
 const Footer = () => (
   <FooterWrapper as="footer">
     <Text>Like what you see here? Check out my profile : </Text>
-    <Link mr={3} href={`/p/${DEVELOPER_URL}`}>John Bishop</Link>
+    <Link mx={3} href={`/p/${DEVELOPER_URL}`}>John Bishop</Link>
     <a href="http://www.github.com/Jarship"><GithubIcon/></a>
   </FooterWrapper>
 );
