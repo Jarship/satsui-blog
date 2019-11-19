@@ -1,9 +1,9 @@
-import Document, { Head, Main, NextScript } from "next/document";
+import Document, { Head, Main, NextScript } from 'next/document';
 
 export default class MyDocument extends Document {
   render() {
     return (
-      <html>
+      <html lang="en">
         <Head>
           <link href="https://fonts.googleapis.com/css?family=Be+Vietnam&display=swap" rel="stylesheet" />
         </Head>
@@ -14,4 +14,4 @@ export default class MyDocument extends Document {
       </html>
     );
   }
-};
+}

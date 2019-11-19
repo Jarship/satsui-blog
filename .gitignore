@@ -4,3 +4,4 @@ yarn.lock
 .env
 out
 secrets.json
+schema.json

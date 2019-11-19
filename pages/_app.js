@@ -1,14 +1,13 @@
-import App from "next/app";
-import React from "react";
-import { ApolloProvider } from "@apollo/react-hooks";
-import { Global, css } from "@emotion/core";
-import { ThemeProvider } from "emotion-theming";
-import theme, { globalStyles } from "../theme";
-import withApolloClient from "../lib/apollo";
+import App from 'next/app';
+import React from 'react';
+import { ApolloProvider } from '@apollo/react-hooks';
+import { Global, css } from '@emotion/core';
+import { ThemeProvider } from 'emotion-theming';
+import theme, { globalStyles } from '../theme';
+import withApolloClient from '../lib/apollo';
 
 
 class MyApp extends App {
-
   static async getInitialProps({ Component, ctx }) {
     let pageProps = {};
 
