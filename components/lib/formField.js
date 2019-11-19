@@ -5,24 +5,29 @@ import PropTypes from 'prop-types';
 import Text from './text';
 import Field from './field';
 
-const Wrapper = styled(Flex)(variant({ scale: "formFields"}));
+const Wrapper = styled(Flex)(variant({ scale: 'formFields' }));
 
-const FormField = ({ value, onChange, placeholder, label, ...otherProps}) => (
+const FormField = ({
+  value, onChange, placeholder, label, ...otherProps
+}) => (
   <Wrapper {...otherProps}>
     <Text type="label">{label}</Text>
     {label.includes('Password')
-    ? <Field
-    value={value}
-    onChange={e => onChange(e.target.value)}
-    placeholder={placeholder}
-    type="password"
-    />
-    : <Field
-    value={value}
-    onChange={e => onChange(e.target.value)}
-    placeholder={placeholder}
-    />
-    }
+      ? (
+        <Field
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          placeholder={placeholder}
+          type="password"
+        />
+      )
+      : (
+        <Field
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          placeholder={placeholder}
+        />
+      )}
   </Wrapper>
 );
 

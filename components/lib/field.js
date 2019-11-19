@@ -1,21 +1,21 @@
-import styled from "@emotion/styled";
-import { variant } from "styled-system";
-import { Box } from "rebass";
+import styled from '@emotion/styled';
+import { variant } from 'styled-system';
+import { Box } from 'rebass';
 
 const Field = styled(Box)(
   {
-    width: "100%",
-    "::placeholder": {
-      textTransform: "capitalize"
-    }
+    width: '100%',
+    '::placeholder': {
+      textTransform: 'capitalize',
+    },
   },
   variant({
-    scale: "fields"
-  })
+    scale: 'fields',
+  }),
 );
 
 Field.defaultProps = {
-  variant: "primary"
+  variant: 'primary',
 };
 
-export default props => <Field as="input" {...props} />;
+export default (props) => <Field as="input" {...props} />;

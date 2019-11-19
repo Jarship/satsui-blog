@@ -1,15 +1,21 @@
-import { useQuery } from "@apollo/react-hooks";
-import { FEED_QUERY } from "../lib/queries";
-import Blog from "./blog";
-import { Box, Flex } from "rebass";
+import { useQuery } from '@apollo/react-hooks';
+import { Flex } from 'rebass';
+import { FEED_QUERY } from '../lib/queries';
+import Blog from './blog';
 
-export default function Feed () {
-
+export default function Feed() {
   const { loading, error, data } = useQuery(FEED_QUERY, {
-    ssr: true
+    ssr: true,
   });
 
-  if (error) return <p>Error loading post, : {error}</p>;
+  if (error) {
+    return (
+      <p>
+Error loading post, :
+        {error}
+      </p>
+    );
+  }
   if (loading) return <div>Loading...</div>;
 
   const { feed: { blogs } } = data;
@@ -20,4 +26,4 @@ export default function Feed () {
       ))}
     </Flex>
   );
-};
+}

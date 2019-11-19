@@ -1,10 +1,12 @@
+/* eslint-disable no-console */
 require('dotenv').config();
-const express = require("express");
-const next = require("next");
-const renderAndCache = require("./render-and-cache");
+const express = require('express');
+const next = require('next');
+const path = require('path');
+const renderAndCache = require('./render-and-cache');
 
-const dev = process.env.NODE_ENV !== "production" && process.env.NODE_ENV !== "offline";
-const offline = process.env.NODE_ENV === "offline";
+const dev = process.env.NODE_ENV !== 'production' && process.env.NODE_ENV !== 'offline';
+const offline = process.env.NODE_ENV === 'offline';
 const app = next({ dev });
 const handle = app.getRequestHandler();
 const server = express();
@@ -15,26 +17,24 @@ if (dev) {
     .then(() => {
       const port = process.env.PORT || 3000;
 
-      server.all("*", (req, res) => handle(req, res));
+      server.all('*', (req, res) => handle(req, res));
 
-      server.listen(port, err => {
+      server.listen(port, (err) => {
         if (err) throw err;
         console.log(`Listening on port ${port}.`);
       });
     })
-    .catch(error => {
-      console.log("An error occured, unable to start the server.");
+    .catch((error) => {
+      console.log('An error occured, unable to start the server.');
       console.log(error);
     });
 } else {
-  const path = require("path");
-  server.use("/_next", express.static(path.join(__dirname, ".next")));
+  server.use('/_next', express.static(path.join(__dirname, '.next')));
 
   if (offline) {
-    server.all("*", (req, res) => handle(req, res));
+    server.all('*', (req, res) => handle(req, res));
   } else {
-    server.get("*", (req, res) => renderAndCache(app, req, res));
+    server.get('*', (req, res) => renderAndCache(app, req, res));
   }
- 
 }
 module.exports = server;

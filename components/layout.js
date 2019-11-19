@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { useApolloClient } from "@apollo/react-hooks";
+import { useApolloClient } from '@apollo/react-hooks';
 import cookie from 'cookie';
 import { useState, useEffect } from 'react';
 import Wrapper from './wrapper';
@@ -12,7 +12,7 @@ const Layout = ({ children }) => {
   const client = useApolloClient();
   const logout = () => {
     document.cookie = cookie.serialize('token', '', {
-      maxAge: -1
+      maxAge: -1,
     });
     client.cache.reset()
       .then(() => client.resetStore())
@@ -39,8 +39,7 @@ const Layout = ({ children }) => {
       <main>
         { children }
       </main>
-      <Footer>
-      </Footer>
+      <Footer />
     </Wrapper>
   );
 };

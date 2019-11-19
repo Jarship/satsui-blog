@@ -1,27 +1,31 @@
-import styled from "@emotion/styled";
+import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
-import { Flex } from "rebass";
+import { Flex } from 'rebass';
 import { position, border } from 'styled-system';
 import { useState } from 'react';
 import Link from './link';
-import Text from "./text";
-import Image from "./image";
+import Text from './text';
+import Image from './image';
 
 const hover = {
-  ":hover": {
-    backgroundColor: "rgba(0, 0, 0, 0.3)",
-    color: "white",
-    borderRadius: "0 0 15px 15px"
-  }
+  ':hover': {
+    backgroundColor: 'rgba(0, 0, 0, 0.3)',
+    color: 'white',
+    borderRadius: '0 0 15px 15px',
+  },
 };
 
 const Menu = styled(Flex)(position, border);
 
-const UserMenu = ({ user: { photo, name, status, url }, logout, ...otherProps}) => {
+const UserMenu = ({
+  user: {
+    photo, name, status, url,
+  }, logout, ...otherProps
+}) => {
   const [open, setOpen] = useState(false);
   const [timer, setTimer] = useState();
 
-  const handleDisplay = seconds => {
+  const handleDisplay = (seconds) => {
     setTimer(setTimeout(() => setOpen(true), 60 * seconds));
   };
 
@@ -40,7 +44,7 @@ const UserMenu = ({ user: { photo, name, status, url }, logout, ...otherProps}) 
       onMouseLeave={() => handleMouseLeave()}
       onClick={() => toggleMenu()}
       onMouseEnter={() => handleDisplay(3)}
-      bg={open ? "darkKhaki" : "khaki"}
+      bg={open ? 'darkKhaki' : 'khaki'}
       {...otherProps}
     >
       <Flex
@@ -52,18 +56,23 @@ const UserMenu = ({ user: { photo, name, status, url }, logout, ...otherProps}) 
           source={photo}
           altText="User Icon"
         />
-        <Text type="menuButton" pl={4}>{name} ▼</Text>
+        <Text type="menuButton" pl={4}>
+          {name}
+          {' '}
+▼
+        </Text>
       </Flex>
-      {open &&
+      {open
+        && (
         <Menu flexDirection="column" bg="darkKhaki" justifyContent="space-between" zIndex="3" borderRadius="0 0 15px 15px">
-          <Link textType="menuButton" variant="menuLink" href="/p/[profile]" as={`/p/${url}`} >
+          <Link textType="menuButton" variant="menuLink" href="/p/[profile]" as={`/p/${url}`}>
             Profile
           </Link>
-          {status === "ADMINISTRATOR" &&
-            <Link variant="menuLink" textType="menuButton" href="/admin">
+          {status === 'ADMINISTRATOR' && (
+          <Link variant="menuLink" textType="menuButton" href="/admin">
               Admin Page
-            </Link>
-          }
+          </Link>
+          )}
           <Text
             sx={hover}
             type="menuButton"
@@ -72,7 +81,7 @@ const UserMenu = ({ user: { photo, name, status, url }, logout, ...otherProps}) 
             Log out
           </Text>
         </Menu>
-      }
+        )}
     </Menu>
   );
 };
@@ -83,7 +92,7 @@ UserMenu.propTypes = {
     name: PropTypes.string.isRequired,
     status: PropTypes.string.isRequired,
     url: PropTypes.string.isRequired,
-  }),
+  }).isRequired,
   logout: PropTypes.func.isRequired,
 };
 

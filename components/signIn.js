@@ -1,39 +1,43 @@
-import styled from "@emotion/styled";
-import { css } from "@emotion/core";
-import { Flex } from "rebass";
-import { useState, useEffect } from "react";
-import { useMutation, useApolloClient } from "@apollo/react-hooks";
-import redirect from "../lib/redirect";
-import { SIGN_IN } from "../lib/mutations";
-import cookie from "cookie";
-import Text from "./lib/text";
-import Field from "./lib/field";
-import { handleLoggedIn} from '../lib/getUser';
+import styled from '@emotion/styled';
+import { css } from '@emotion/core';
+import { Flex } from 'rebass';
+import { useState, useEffect } from 'react';
+import { useMutation, useApolloClient } from '@apollo/react-hooks';
+import cookie from 'cookie';
+import redirect from '../lib/redirect';
+import { SIGN_IN } from '../lib/mutations';
+import Text from './lib/text';
+import Field from './lib/field';
+import { handleLoggedIn } from '../lib/getUser';
 import FormField from './lib/formField';
 
 const Container = styled(Flex)(
   () => css`
-  `
+  `,
 );
 
 const Form = ({ ...otherProps }) => {
   const client = useApolloClient();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [signInError, setSignInError] = useState('');
+
   useEffect(() => {
     const fetchUser = async () => {
       const results = await handleLoggedIn(client);
-      if(results.user) {
+      if (results.user) {
         redirect({}, '/');
       }
     };
 
     fetchUser();
   }, []);
-  const onCompleted = data => {
+  const onCompleted = (data) => {
     if (!data.signInUser.error) {
     // Store the token in cookie
       document.cookie = cookie.serialize('token', data.signInUser.token, {
         maxAge: 30 * 24 * 60 * 60,
-        path: '/'
+        path: '/',
       });
       // Force a reload of all the current queries now that the user is
       // logged in
@@ -43,19 +47,15 @@ const Form = ({ ...otherProps }) => {
     }
   };
 
-  const onError = error => {
+  const onError = (error) => {
     // ToDo: Add logging
-    console.log("error ", error);
+    console.log('error ', error);
   };
 
   const [signInUser, { error }] = useMutation(SIGN_IN, {
     onCompleted,
-    onError
+    onError,
   });
-
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [signInError, setSignInError] = useState("");
 
   if (error) console.log(error);
 
@@ -67,13 +67,13 @@ const Form = ({ ...otherProps }) => {
       flexDirection="column"
       {...otherProps}
       height="500px"
-      onSubmit={e => {
+      onSubmit={(e) => {
         e.preventDefault();
         signInUser({
           variables: {
             email: email.toLowerCase(),
-            password: password
-          }
+            password,
+          },
         });
       }}
     >
@@ -99,6 +99,6 @@ const Form = ({ ...otherProps }) => {
     </Container>
 
   );
-}
+};
 
 export default Form;

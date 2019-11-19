@@ -1,5 +1,4 @@
-import Layout from "../components/layout";
-import { withApollo } from "../lib/apollo";
+import Layout from '../components/layout';
 
 const Contact = () => (
   <Layout>

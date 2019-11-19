@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import Link from 'next/link';
 import { css } from '@emotion/core';
 import styled from '@emotion/styled';
@@ -15,17 +16,19 @@ const LinkWrapper = styled(Flex)(
       text-decoration: none;
     }
   `,
-  variant({ scale: "linkStyles" }),
+  variant({ scale: 'linkStyles' }),
   {
-    label: "common--link"
-  }
+    label: 'common--link',
+  },
 );
 
 LinkWrapper.defaultProps = {
-  variant: "common"
-}
+  variant: 'common',
+};
 
-const StyledLink = ({ textType, href, as = null, children, ...otherProps }) => (
+const StyledLink = ({
+  textType, href, as = null, children, ...otherProps
+}) => (
   <LinkWrapper {...otherProps}>
     <Link href={href} as={as}>
       <a>
@@ -37,9 +40,15 @@ const StyledLink = ({ textType, href, as = null, children, ...otherProps }) => (
   </LinkWrapper>
 );
 
+StyledLink.defaultProps= {
+  textType: ""
+};
+
 StyledLink.propTypes = {
+  textType: PropTypes.string,
+  as: PropTypes.string.isRequired,
   href: PropTypes.string.isRequired,
-  children: PropTypes.string.isRequired
+  children: PropTypes.string.isRequired,
 };
 
 export default StyledLink;

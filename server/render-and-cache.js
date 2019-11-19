@@ -1,12 +1,14 @@
-const LRUCache = require("lru-cache");
+/* eslint-disable no-console */
+const LRUCache = require('lru-cache');
 
 const ssrCache = new LRUCache({
   max: 100 * 1024 * 1024,
-  length: n => n.length,
-  maxAge: 1000 * 60 * 60 * 24 * 30 // 30 days
+  length: (n) => n.length,
+  maxAge: 1000 * 60 * 60 * 24 * 30, // 30 days
 });
 
 // Reference: https://medium.com/@igordata/how-to-cache-all-pages-in-next-js-at-server-side-1850aace87dc
+// eslint-disable-next-line consistent-return
 module.exports = async (app, req, res) => {
   const key = req.path;
 

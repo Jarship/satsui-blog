@@ -4,7 +4,7 @@ import { Box } from 'rebass';
 const icons = [
   '../../static/GitHub-Mark-32px.png',
   '../../static/GitHub-Mark-64px.png',
-  '../../static/GitHub-Mark-120px-plus.png'
+  '../../static/GitHub-Mark-120px-plus.png',
 ];
 
 const GithubIcon = styled(Box)`
