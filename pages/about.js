@@ -85,15 +85,15 @@ const About = () => (
       <Text textAlign="center" type="h2">Development Progress</Text>
       <Text type="h3">Completed</Text>
       <Flex width={[1, 0.9, 0.8]} flexWrap="wrap" justifyContent="space-evenly">
-        {COMPLETED.map((item) => <Section type="completed">{item}</Section>)}
+        {COMPLETED.map((item, key) => <Section key={`a${key}`} type="completed">{item}</Section>)}
       </Flex>
       <Text type="h3">In Progress</Text>
       <Flex width={[1, 0.9, 0.8]} flexWrap="wrap" justifyContent="space-evenly">
-        {IN_PROGRESS.map((item) => <Section type="inProgress">{item}</Section>)}
+        {IN_PROGRESS.map((item, key) => <Section key={`b${key}`} type="inProgress">{item}</Section>)}
       </Flex>
       <Text type="h3">Planned</Text>
       <Flex width={[1, 0.9, 0.8]} justifyContent="space-evenly" flexWrap="wrap">
-        {PLANNED.map((item) => <Section type="planned">{item}</Section>)}
+        {PLANNED.map((item, key) => <Section key={`c${key}`} type="planned">{item}</Section>)}
       </Flex>
     </Flex>
   </Layout>
