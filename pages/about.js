@@ -10,20 +10,22 @@ const COMPLETED = [
   'Authorization',
   'User Profile Pictures',
   'Unique Profile URLs',
+  'Basic About Page',
+  'Linting Fullstack',
 ];
 
 const IN_PROGRESS = [
-  'About Page',
   'User Profile "About Me\'s"',
+  'Password Reset',
 ];
 
 const PLANNED = [
-  'Password Reset',
   'Email Verification Link',
   'Settings Page',
   'Administrator Page',
   'User Agreement',
   'Subscription Box',
+  'PWA Dialog Box',
 ];
 
 const Section = ({ type, children, ...otherProps }) => (
@@ -43,26 +45,33 @@ const About = () => (
     <Flex height="100%" justifyContent="space-evenly" flexDirection="column" alignItems="center">
       <Text type="h2">About Sat Sui</Text>
       <Text type="h3" textAlign="center" width={[1, 0.9, 0.8]}>
-Sat Sui is Latin for
+        Sat Sui is Latin for
         <em>self-sufficient</em>
       </Text>
       <Text width={[1, 0.9, 0.8]}>
-        &emsp;Sat Sui should be viewed more as a way of life: A group of
-        self-responsible individuals who work towards community resilience.
-        It is all about recognizing our shared humanity and the shared struggle.
-        This blog is meant to be a stepping-stone for the average person. Regardless
-        of your political, economic, or environmental beliefs, we all share the fragility of
-        living in a flawed system.
-        Together, we can accept our personal responsibility and build towards a
-        constructive, regenerative, and permanent future.
+        &emsp;Sat Sui is a philosophy, a way of looking at life. The principles shared
+        here are endlessly applicable. Gaining a sense of your self requires shedding
+        outside thoughts, recognizing what you know for yourself, and recognizing our
+        shared humanity and shared struggle. This blog is meant to be a stepping-stone
+        for the working person. Regardless of your political, economic, or environmental
+        beliefs, we are all reliant upon a fragile and flawed system. Narratives and talking
+        points are paraded and emphasized to separate what you are exposed to, isolate
+        you socially, and constantly refocus your attention on unfulfilling aims.
         <br />
-        If you would like to be
-        a part of the movement, please read along. If you&apos;d like to follow the development,
-        please check below.
+        <strong>Welcome</strong>
         <br />
-        <strong>Thanks for visiting</strong>
+        Together, we can recognize our personal responsibility, reveal our path, and build
+        towards a constructive, regenerative, and permanent future.
       </Text>
       <Flex alignItems="center" width={1} flexDirection="column">
+        <Text mt={4}>
+          If you would like to be a part of the movement, please read along.
+          <br />
+          If you&apos;d like to follow the development,
+          please check below.
+          <br />
+          <strong>Thanks for visiting</strong>
+        </Text>
         <Text type="h2">Repositories</Text>
         <Flex width={0.8} justifyContent="space-evenly">
           <Text type="h3">Blog</Text>
