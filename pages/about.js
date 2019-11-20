@@ -51,12 +51,12 @@ const About = () => (
       <Text width={[1, 0.9, 0.8]}>
         &emsp;Sat Sui is a philosophy, a way of looking at life. The principles shared
         here are endlessly applicable. Gaining a sense of your self requires shedding
-        outside thoughts, recognizing what you know for yourself, and recognizing our
+        outside thoughts, recognizing what you know for yourself, and embracing our
         shared humanity and shared struggle. This blog is meant to be a stepping-stone
         for the working person. Regardless of your political, economic, or environmental
-        beliefs, we are all reliant upon a fragile and flawed system. Narratives and talking
-        points are paraded and emphasized to separate what you are exposed to, isolate
-        you socially, and constantly refocus your attention on unfulfilling aims.
+        beliefs, we are all reliant upon a fragile and flawed system. Outside narratives
+        are paraded and emphasized to separate what you are exposed to, isolate you socially,
+        degrade your self-esteem relentlessly refocus your attention on unfulfilling aims.
         <br />
         <strong>Welcome</strong>
         <br />
