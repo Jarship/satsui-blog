@@ -1,12 +1,12 @@
 import { useQuery } from '@apollo/react-hooks';
 import { useState } from 'react';
-import { Flex } from 'rebass';
 import PropTypes from 'prop-types';
 import { handleLoggedIn } from '../../lib/getUser';
 import Layout from '../../components/layout';
 import Image from '../../components/lib/image';
 import Text from '../../components/lib/text';
 import { UploadHandler } from '../../components/userPhoto';
+import ProfileTop from '../../components/lib/profileTop';
 import { PROFILE_QUERY } from '../../lib/queries';
 
 const Profile = ({ userProfileUrl, current }) => {
@@ -22,24 +22,28 @@ const Profile = ({ userProfileUrl, current }) => {
 
   const { profile: user } = data;
 
+  const Description = () => <Text>Content Coming</Text>;
+
+  const sameUsers = current && userProfileUrl === current.url;
+
+  const photo = <Image variant="profile" source={user.photo} altText="ProfilePicture" />;
+
+  const upload = <UploadHandler photo={user.photo} setUploadFailure={setUploadFailure} />;
+
+
   return (
     <Layout>
-      <Flex flexDirection="column" alignItems="center">
-        <Text type="h2">{user.name}</Text>
-        <Flex alignSelf="flex-start" ml={4}>
-          {current && userProfileUrl === current.url
-            ? (
-              <>
-                <UploadHandler
-                  photo={user.photo}
-                  setUploadFailure={setUploadFailure}
-                />
-              </>
-            )
-            : <Image variant="profile" source={user.photo} altText="Profile Picture" />}
-        </Flex>
-        {uploadFailure && <Text type="error">{uploadFailure}</Text>}
-      </Flex>
+      <ProfileTop
+        name={user.name}
+        photoComponent={sameUsers ? upload : photo}
+        descriptionComponent={<Description />}
+      />
+      {uploadFailure && (
+      <Text>
+        Upload Failure:
+        {uploadFailure}
+      </Text>
+      )}
     </Layout>
   );
 };
