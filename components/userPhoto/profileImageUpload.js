@@ -84,7 +84,9 @@ FileUpload.defaultProps = {
 };
 
 FileUpload.propTypes = {
-  image: PropTypes.func.isRequired,
+  image: PropTypes.shape({
+    type: PropTypes.func.isRequired,
+  }).isRequired,
   loading: PropTypes.number,
   onFileChange: PropTypes.func,
 };
