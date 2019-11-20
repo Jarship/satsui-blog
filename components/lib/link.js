@@ -9,7 +9,7 @@ import Text from './text';
 
 const LinkWrapper = styled(Flex)(
   () => css`
-    a {
+    a {Field
       text-decoration: none;
     }
     a:visited {
@@ -42,11 +42,12 @@ const StyledLink = ({
 
 StyledLink.defaultProps = {
   textType: '',
+  as: null,
 };
 
 StyledLink.propTypes = {
   textType: PropTypes.string,
-  as: PropTypes.string.isRequired,
+  as: PropTypes.string,
   href: PropTypes.string.isRequired,
   children: PropTypes.string.isRequired,
 };
