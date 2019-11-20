@@ -1,4 +1,4 @@
-import { useQuery, useMutation } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/react-hooks';
 import { useState } from 'react';
 import { Flex } from 'rebass';
 import PropTypes from 'prop-types';
@@ -6,13 +6,11 @@ import { handleLoggedIn } from '../../lib/getUser';
 import Layout from '../../components/layout';
 import Image from '../../components/lib/image';
 import Text from '../../components/lib/text';
-import { UPLOAD_PROFILE_PICTURE } from '../../lib/mutations';
-import FileUpload from '../../components/profileImageUpload';
+import { UploadHandler } from '../../components/userPhoto';
 import { PROFILE_QUERY } from '../../lib/queries';
 
 const Profile = ({ userProfileUrl, current }) => {
   const [uploadFailure, setUploadFailure] = useState(null); // Errors from uploading
-  const [uploadProgress, setUploadProgress] = useState(0); // upload progress for picture
 
   const { loading, error, data } = useQuery(PROFILE_QUERY, {
     variables: { url: userProfileUrl },
@@ -23,41 +21,6 @@ const Profile = ({ userProfileUrl, current }) => {
   if (loading) return <div>Loading...</div>;
 
   const { profile: user } = data;
-  const [profilePicture, setProfilePicture] = useState(<Image variant="profile" source={user.photo} altText="Profile Picture" />);
-
-  // onCompleted is for the mutation that fetches the Upload URL
-  const onCompleted = async (response) => {
-    if (!response.uploadProfilePicture.error) {
-      setUploadProgress(0);
-      setProfilePicture(<Image variant="profile" source={response.uploadProfilePicture.photoUrl} altText="Profile Picture" />);
-    } else {
-      setUploadFailure(response.uploadProfilePicture.error.message);
-    }
-  };
-
-  // onError is for the mutation that fetches the Upload URL
-  const onError = (mutationError) => {
-    console.log('error', mutationError);
-  };
-
-  // The mutation that fetches the Upload URL
-  const [uploadProfilePicture] = useMutation(UPLOAD_PROFILE_PICTURE, {
-    onCompleted,
-    onError,
-  });
-
-  // handle Uploading the user profile photo
-  const handlePictureUpload = async ({
-    file,
-  } = {}) => {
-    setUploadProgress(25);
-    if (!file) {
-      return;
-    }
-    setUploadProgress(50);
-    uploadProfilePicture({ variables: { picture: file } });
-    setUploadProgress(100);
-  };
 
   return (
     <Layout>
@@ -67,14 +30,13 @@ const Profile = ({ userProfileUrl, current }) => {
           {current && userProfileUrl === current.url
             ? (
               <>
-                <FileUpload
-                  loading={uploadProgress}
-                  image={profilePicture}
-                  onFileChange={handlePictureUpload}
+                <UploadHandler
+                  photo={user.photo}
+                  setUploadFailure={setUploadFailure}
                 />
               </>
             )
-            : profilePicture}
+            : <Image variant="profile" source={user.photo} altText="Profile Picture" />}
         </Flex>
         {uploadFailure && <Text type="error">{uploadFailure}</Text>}
       </Flex>

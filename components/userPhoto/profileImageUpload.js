@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
 import { Flex } from 'rebass';
 import styled from '@emotion/styled';
-import Text from './lib/text';
-import Progress from './lib/progress';
-import Field from './lib/field';
+import Text from '../lib/text';
+import Progress from '../lib/progress';
+import Field from '../lib/field';
 
 const FileWrapper = styled(Flex)(
   ({
