@@ -40,8 +40,8 @@ const StyledLink = ({
   </LinkWrapper>
 );
 
-StyledLink.defaultProps= {
-  textType: ""
+StyledLink.defaultProps = {
+  textType: '',
 };
 
 StyledLink.propTypes = {
